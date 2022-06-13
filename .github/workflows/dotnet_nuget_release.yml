@@ -33,10 +33,11 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Decode NuGet config
+    - shell: bash
       run: |
         echo -n $NUGETCONFIG | base64 --decode > ./nuget.config
-        cat ./nuget.config
     - name: Push NuGets
+    - shell: bash
       run: |
        for f in ./*/*.nupkg
        do
