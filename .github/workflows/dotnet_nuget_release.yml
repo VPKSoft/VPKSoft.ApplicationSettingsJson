@@ -36,7 +36,6 @@ jobs:
       run: |
         echo -n $NUGETCONFIG | base64 --decode > ./nuget.config
     - name: Push NuGets
-    - shell: bash
       run: |
        for f in ./*/*.nupkg
        do
