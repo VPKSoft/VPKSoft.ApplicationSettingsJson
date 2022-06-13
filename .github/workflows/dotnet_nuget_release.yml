@@ -1,11 +1,13 @@
 name: .NET NuGet Tag Release
 on:
+  #push:
+   # tags:
+  #  - 'v*'
+  #create:
+  #  tags:
+  #  - 'v*'
   push:
-    tags:
-    - 'v*'
-  create:
-    tags:
-    - 'v*'
+    branches: [ main ]
 
 env:
   NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
