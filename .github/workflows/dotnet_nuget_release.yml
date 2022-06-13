@@ -35,6 +35,7 @@ jobs:
     - name: Decode NuGet config
       run: |
         echo -n $NUGETCONFIG | base64 --decode > ./nuget.config
+        cat ./nuget.config
     - name: Push NuGets
       run: |
        for f in ./*/*.nupkg
