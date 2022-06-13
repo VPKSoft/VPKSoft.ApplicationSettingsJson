@@ -34,8 +34,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Decode NuGet config
       run: |
-        echo $NUGETCONFIG
-        echo -n $NUGETCONFIG | base64 --decode > ./nuget.config
+        echo -n "$NUGETCONFIG" | base64 --decode > ./nuget.config
     - name: Push NuGets
       run: |
        for f in ./*/*.nupkg
