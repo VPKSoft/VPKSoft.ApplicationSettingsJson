@@ -9,17 +9,16 @@ on:
   push:
     branches: [ main ]
 
-env:
-  NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
-  NUGETAPI: ${{ secrets.NUGETAPI }}      
-  GH_PACKAGES_APIKEY: ${{ secrets.GH_PACKAGES_APIKEY }}
-  PACKAGESAPI: ${{ secrets.PACKAGESAPI }}
-  NUGETCONFIG: ${{ secrets.NUGETCONFIG }}
 
 
 jobs:
   build:
-
+    env:
+      NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
+      NUGETAPI: ${{ secrets.NUGETAPI }}      
+      GH_PACKAGES_APIKEY: ${{ secrets.GH_PACKAGES_APIKEY }}
+      PACKAGESAPI: ${{ secrets.PACKAGESAPI }}
+      NUGETCONFIG: ${{ secrets.NUGETCONFIG }}
     runs-on: ubuntu-latest
 
     steps:
