@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{208A7F7F-BA1B-4205-BD44-331EF97A1926}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\dotnet_nuget_release.yml = .github\workflows\dotnet_nuget_release.yml
 		VPKSoft.ApplicationSettingsJson.sln.licenseheader = VPKSoft.ApplicationSettingsJson.sln.licenseheader
 	EndProjectSection
 EndProject

@@ -1,15 +1,11 @@
 name: .NET NuGet Tag Release
 on:
-  #push:
-   # tags:
-  #  - 'v*'
-  #create:
-  #  tags:
-  #  - 'v*'
   push:
-    branches: [ main ]
-
-
+    tags:
+    - 'v*'
+  create:
+    tags:
+    - 'v*'
 
 jobs:
   build:
@@ -41,6 +37,7 @@ jobs:
        # Glob doesn't seem to work: for f in ./*/*.nupkg
        do
          dotnet nuget push $f -k $GH_PACKAGES_APIKEY -s $PACKAGESAPI
+         dotnet nuget push $f -k NUGET_APIKEY -s NUGETAPI
        done
 
         
