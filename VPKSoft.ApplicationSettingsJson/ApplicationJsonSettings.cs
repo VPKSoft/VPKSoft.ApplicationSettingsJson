@@ -39,12 +39,22 @@ namespace VPKSoft.ApplicationSettingsJson;
 public abstract class ApplicationJsonSettings
 {
     /// <summary>
+    /// Initializes a new instance of the <see cref="ApplicationJsonSettings"/> class.
+    /// </summary>
+    protected ApplicationJsonSettings()
+    {
+        Defaults();
+    }
+
+    /// <summary>
     /// Loads application settings from the specified file name.
     /// </summary>
     /// <param name="fileName">Name of the file to load the settings from.</param>
     public virtual void Load(string fileName)
     {
         object? data = default;
+
+        Defaults();
 
         if (File.Exists(fileName))
         {
@@ -82,6 +92,30 @@ public abstract class ApplicationJsonSettings
             else
             {
                 existingProperty.SetValue(this, saved?.GetValue(data) ?? attribute.Default);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Resets the default values for properties marked with the <see cref="SettingsAttribute"/> attribute for this instance.
+    /// </summary>
+    public void Defaults()
+    {
+        var existingProperties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            .Where(f => f.GetCustomAttribute<SettingsAttribute>() != null).ToList();
+
+        foreach (var existingProperty in existingProperties)
+        {
+            var attribute = existingProperty.GetCustomAttribute<SettingsAttribute>();
+
+            if (attribute.DefaultValueConverter != null)
+            {
+                var jsonStringConverter = (IDefaultValueConverter)Activator.CreateInstance(attribute.DefaultValueConverter);
+                existingProperty.SetValue(this, jsonStringConverter.ConvertFromString(attribute.Default));
+            }
+            else
+            {
+                existingProperty.SetValue(this, attribute.Default);
             }
         }
     }
